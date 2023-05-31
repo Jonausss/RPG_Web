@@ -1,0 +1,113 @@
+/*#region General*/
+body {
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+* {
+    margin: 0;
+}
+/*#endregion General*/
+
+/*==============*/
+.title-header {
+    align-items: center;
+    text-align: center;
+    color: rgb(43, 43, 43);
+    font-size: 30pt;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    display: block;
+    background-color: rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(39, 39, 39);
+    padding: 12px 20px 12px 20px;
+}
+
+.card-evolution {
+    border: 1px solid silver;
+}
+.card-evolution .card-body {
+    padding-top: 30px;
+    margin: 0 33vh;
+    align-items: center;
+}
+
+.card-body table {
+    border-collapse: collapse;
+    background-color: rgb(39, 39, 39);
+    color: rgb(236, 236, 236);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    table-layout: fixed;
+}
+.card-body th, td {
+    border: 1px solid rgb(180, 180, 180);
+    border-bottom: 0;
+    padding: 10px;
+    width: 100vh;
+    text-align: left;
+    overflow: hidden;
+}
+.card-body button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-color: transparent;
+}
+
+.card-bottom {
+    padding: 10px;
+    margin: 20px 33vh;
+}
+
+.card-battle .card-body{
+    display: flex;
+    width: 145vh;
+    margin: 4vh 15.5%;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+.card-battle .card-body select {
+    font-size: 15px;
+    color: rgb(66, 66, 66);
+    border-color: rgb(165, 165, 165);
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+    height: 40px;
+}
+.card-battle .card-body select{
+    margin-bottom: 5px;
+}
+.card-battle .card-body .select-personagem{
+    margin-bottom: 20px;
+}
+.card-battle .card-body .select-personagem button{
+    background-color: rgb(255, 77, 77);
+    color: rgb(236, 236, 236);
+    padding: 10px 491px;
+}
+.card-battle .card-body .loot-inputs{
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.card-battle .card-body .loot-inputs button{
+    background-color: rgb(244, 209, 96);
+    color: rgb(134, 134, 134);
+}
+
+.battle-inputs {
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+}
+.battle-inputs button{
+    background-color: rgb(0, 132, 255);
+    color: rgb(236, 236, 236);
+    height: 100%;
+    padding: 6px 12px 6px 12px;
+}

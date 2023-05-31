@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BATALHA RPG</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title-header">BATALHA RPG</h1>
+        </div>
+        <div class="main">
+            <div class="card">
+                <div class="card-evolution">
+                    <div class="card-title">
+                        <button>PERSONAGENS</button>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                                <tr>
+                                    <th>Classe</th>
+                                    <th>Vida</th>
+                                    <th>Dano</th>
+                                </tr>
+                                <tr>
+                                    <td>Guerreiro</td>
+                                    <td>
+                                        <label id="guerreiroVidaId">50</label>
+                                        <button id="buttonEvoluirVida">+</button>
+                                    </td>
+                                    <td>
+                                        <label id="guerreiroDanoId">10</label>
+                                        <button id="buttonEvoluirDano">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Arqueiro</td>
+                                    <td>
+                                        <label id="guerreiroVidaId">30</label>
+                                        <button id="buttonEvoluirVida">+</button>
+                                    </td>
+                                    <td>
+                                        <label id="guerreiroDanoId">20</label>
+                                        <button id="buttonEvoluirDano">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mago</td>
+                                    <td>
+                                        <label id="guerreiroVidaId">20</label>
+                                        <button id="buttonEvoluirVida">+</button>
+                                    </td>
+                                    <td>
+                                        <label id="guerreiroDanoId">30</label>
+                                        <button id="buttonEvoluirDano">+</button>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                    <div class="card-bottom">
+                        <label>Pontos de Evolução: </label>
+                        <label id="pointsEvolution">1</label>
+                    </div>
+                </div>
+                <div class="card-battle">
+                    <div class="card-title">
+                        <button>BATALHA</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="select-personagem">
+                            <form>
+                                <select class="select">
+                                    <option disabled selected>Selecione seus inimigos</option>
+                                    <option value="0">Orcs</option>
+                                    <option value="1">Mortos-vivos</option>
+                                    <option value="2">Demônios</option>
+                                </select>
+                                <button onclick="IniciarBatalha()">INICIAR BATALHA</button>
+                            </form>
+                        </div>
+                        <div class="battle-inputs">
+                            <div class="player-inputs">
+                                <div class="select-personagem">
+                                    <label id="selectCharacterLabel">Personagem</label>
+                                    <select>
+                                        <option disabled selected>Selecione seus inimigos</option>
+                                        <option value="0">Guerreiro</option>
+                                        <option value="1">Arqueiro</option>
+                                        <option value="2">Mago</option>
+                                    </select>
+                                </div>
+                                <img id="imagemPersonagemId">
+                                <div class="current-character-status">
+                                    <table>
+                                        <tr>
+                                            <th>Vida</th>
+                                            <td id="personagemVidaId">0</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Dano</th>
+                                            <td id="personagemDanoId">0</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <button id="attack-button" onclick="Atacar()">ATACAR</button>
+                            <div class="enemy-inputs">
+                                <div class="select-personagem">
+                                    <label id="selectEnemyLabel">Inimigo</label>
+                                    <select>
+                                        <option disabled selected>Selecione seus inimigos</option>
+                                    </select>
+                                </div>
+                                <img id="imagemInimigoId">
+                                <div class="current-character-status">
+                                    <table>
+                                        <tr>
+                                            <th>Vida</th>
+                                            <td id="vidaInimigoId">0</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Dano</th>
+                                            <td id="danoInimigoId">0</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loot-inputs">
+                            <label>Resultado: </label> <label id="resultadoId"></label>
+                            <button id="botaoSaquearId" onclick="Saquear()" type="button">SAQUEAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
