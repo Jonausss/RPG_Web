@@ -87,7 +87,9 @@ function createEnemies() {
 //evolution
 
 function attPointsEvo() {
-    $("#EvolutionPointsId").html(pointsToEvo)
+    $("#EvolutionPointsId").html(pointsToEvo);
+    attButtonDisabled();
+    console.log("attPointsEvo()."+pointsToEvo)
 }
 
 function attButtonDisabled() {
@@ -100,39 +102,50 @@ function attButtonDisabled() {
 }
 
 function evolveStat(statType, classType) {
+    pointsToEvo -= 1;
+
     if (statType == "damage"){
+        var debugStat = "damage";
         switch(classType){
             case "warrior":
                 damageWarrior += pointsWhenEvo;
                 $("#warriorDamageId").html(damageWarrior);
+                var debugClass = "warrior";
                 break
             case "archer":
                 damageArcher += pointsWhenEvo;
                 $("#archerDamageId").html(damageArcher);
+                var debugClass = "archer";
                 break
             case "wizard":
-                damageWarrior += pointsWhenEvo;
+                damageWizard += pointsWhenEvo;
                 $("#wizardDamageId").html(damageWizard);
+                var debugClass = "wizard";
                 break
         }
     }
     else if (statType == "life"){
-        switch(statType){
+        var debugStat = "life";
+        switch(classType){
             case "warrior":
-                ilfeWarrior += pointsWhenEvo;
+                lifeWarrior += pointsWhenEvo;
                 $("#warriorLifeId").html(lifeWarrior);
+                var debugClass = "warrior";
                 break
             case "archer":
                 lifeArcher += pointsWhenEvo;
                 $("#archerLifeId").html(lifeArcher);
+                var debugClass = "archer";
                 break
             case "wizard":
                 lifeWizard += pointsWhenEvo;
-                $("#lifeDamageId").html(lifeWizard);
+                $("#wizardLifeId").html(lifeWizard);
+                var debugClass = "wizard";
                 break
         }
     }
 
+    console.log("evolveStat()."+debugStat+"."+debugClass);
     attPointsEvo();
 }
 
@@ -148,6 +161,7 @@ function selectEnemies() {
     $("#selectEnemyId").html(htmlOptions);
     
     attDataTarget();
+    console.log("selectEnemies()");
 }
 
 function attDataTarget() {
@@ -156,17 +170,23 @@ function attDataTarget() {
     $("#lifeEnemyId").html(enemies[indexEnemiesGroup][indexTargetEnemy].life);
     $("#damageEnemyId").html(enemies[indexEnemiesGroup][indexTargetEnemy].damage);
     $("#imageEnemyId").attr("src", enemies[indexEnemiesGroup][indexTargetEnemy].image);
+
+    console.log("attDataTarget()");
 }
 
 function attDataCharacter() {
     $("#lifeCharacterId").html(characters[indexCharacters].life);
     $("#damageCharacterId").html(characters[indexCharacters].damage);
     $("#imageCharacterId").attr("src", characters[indexCharacters].image);
+
+    console.log("attDataCharacter()");
 }
 
 function selectCharacter() {
     indexCharacters = parseInt($("#selectCharacterId").val());
     attDataCharacter();
+
+    console.log("selectCharacter()");
 }
 
 function startBattle() {
@@ -174,29 +194,34 @@ function startBattle() {
     createEnemies();
     attDataCharacter();
     selectEnemies();
+
+    console.log("startBattle()");
 }
 
 function verifyAllEnemiesDead() {
     for(var i = 0; i < enemies[indexEnemiesGroup].lenght; i++) {
+        console.log("verifyAllEnemiesDead().verificationFor."+i)
         if(enemies[indexEnemiesGroup][i].life > 0) {
+            console.log("verifyAllEnemiesDead().false");
             return false
         }
     }
-
+    
+    console.log("verifyAllEnemiesDead().true");
     return true;
 }
 
 function attack() {
     var htmlFinal = "";
 
-    if(characters[indexCharacters].life <= 0) {
+    if(characters[indexCharacters].life <= 0) { //check if current character is dead
         htmlFinal = characters[indexCharacters].type + " is dead, attack with another character";
     }
-    else if (enemies[indexEnemiesGroup][indexTargetEnemy].life <= 0) {
+    else if (enemies[indexEnemiesGroup][indexTargetEnemy].life <= 0) { //check if current enemy is dead
         htmlFinal = enemies[indexEnemiesGroup][indexTargetEnemy].name + " is already dead, select another enemy";
     }
     else {
-        enemies[indexEnemiesGroup][indexTargetEnemy].life -= character[indexCharacters].damage;
+        enemies[indexEnemiesGroup][indexTargetEnemy].life -= characters[indexCharacters].damage;
 
         htmlFinal = enemies[indexEnemiesGroup][indexTargetEnemy].name + " received " + characters[indexCharacters].damage + " damage";
 
@@ -227,10 +252,13 @@ function attack() {
     attDataTarget();
 
     $("#resultId").html(htmlFinal);
+    console.log("attack()");
 }
 
 function loot() {
     pointsToEvo += 1;
     attPointsEvo();
     $("#buttonLootId").attr("disabled", true);
+
+    console.log("loot()");
 }
