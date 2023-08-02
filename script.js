@@ -157,11 +157,11 @@ function selectEnemies() {
 
     for(var i=0; i<3; i++) {
         htmlOptions = "<option value=" + i + ">" + enemies[indexEnemiesGroup][i].name + "</option>"
+        console.log("SelectEnemies().append."+htmlOptions);
     }
-    $("#selectEnemyId").html(htmlOptions);
+    $("#selectEnemyId").append(htmlOptions);
     
     attDataTarget();
-    console.log("selectEnemies()");
 }
 
 function attDataTarget() {
