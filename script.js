@@ -65,28 +65,41 @@ function Enemy(name, life, damage, image) {
     this.image = image;
 }
 
+var alreadyCreated = false;
 function createEnemies() {
-    var orc = new Enemy("Orc", 20, 10, "Sprites/Enemies/Orcs/orc.png");
-    var orcShaman = new Enemy("Orc Shaman", 20, 30, "Sprites/Enemies/Orcs/orc shaman.png");
-    var orcBoss = new Enemy("Orc Boss", 50, 10, "Sprites/Enemies/Orcs/orc boss.png");
-    var orcs = [orc, orcShaman, orcBoss];
+    
+    if (!alreadyCreated)
+    {
+        var orc = new Enemy("Orc", 20, 10, "Sprites/Enemies/Orcs/orc.png");
+        var orcShaman = new Enemy("Orc Shaman", 20, 30, "Sprites/Enemies/Orcs/orc shaman.png");
+        var orcBoss = new Enemy("Orc Boss", 50, 10, "Sprites/Enemies/Orcs/orc boss.png");
+        var orcs = [orc, orcShaman, orcBoss];
 
-    var skeleton = new Enemy("Skeleton", 10, 20, "Sprites/Enemies/Undeads/skeleton.png");  
-    var zombie = new Enemy("zombie", 20, 30, "Sprites/Enemies/Undeads/zombie.png");  
-    var zombieBoss = new Enemy("zombie Boss", 30, 50, "Sprites/Enemies/Undeads/zombie boss.png");  
-    var undeads = [skeleton, zombie, zombieBoss];
-  
-    var imp = new Enemy("Imp", 20, 20, "Sprites/Enemies/Demons/imp.png");
-    var demon = new Enemy("Demon", 30, 30, "Sprites/Enemies/Demons/demon.png");
-    var demonBoss = new Enemy("Demon Boss", 50, 40, "Sprites/Enemies/Demons/demon boss.png");
-    var demons = [imp, demon, demonBoss];
+        var skeleton = new Enemy("Skeleton", 10, 20, "Sprites/Enemies/Undeads/skeleton.png");  
+        var zombie = new Enemy("zombie", 20, 30, "Sprites/Enemies/Undeads/zombie.png");  
+        var zombieBoss = new Enemy("zombie Boss", 30, 50, "Sprites/Enemies/Undeads/zombie boss.png");  
+        var undeads = [skeleton, zombie, zombieBoss];
+    
+        var imp = new Enemy("Imp", 20, 20, "Sprites/Enemies/Demons/imp.png");
+        var demon = new Enemy("Demon", 30, 30, "Sprites/Enemies/Demons/demon.png");
+        var demonBoss = new Enemy("Demon Boss", 50, 40, "Sprites/Enemies/Demons/demon boss.png");
+        var demons = [imp, demon, demonBoss];
 
-    enemies = [orcs, undeads, demons];
+        enemies = [orcs, undeads, demons];
+
+        alreadyCreated = true;
+
+        console.log("createEnemies()");
+    }
+    else 
+    {
+        console.log("failed on using createEnemies()");
+    }
 }
 
 //evolution
 
-function attPointsEvo() {
+function attPointsEvo() { 
     $("#EvolutionPointsId").html(pointsToEvo);
     attButtonDisabled();
     console.log("attPointsEvo()."+pointsToEvo)
@@ -154,14 +167,13 @@ function evolveStat(statType, classType) {
 function selectEnemies() {
     var htmlOptions = "";
     indexEnemiesGroup = $("#selectEnemyGroupId").val()
+    $("#selectEnemyId").html("");
 
     for(var i=0; i<3; i++) {
         htmlOptions = "<option value=" + i + ">" + enemies[indexEnemiesGroup][i].name + "</option>"
         console.log("SelectEnemies().append."+htmlOptions);
+        $("#selectEnemyId").append(htmlOptions);
     }
-    $("#selectEnemyId").append(htmlOptions);
-    
-    attDataTarget();
 }
 
 function attDataTarget() {
@@ -190,16 +202,19 @@ function selectCharacter() {
 }
 
 function startBattle() {
+    $("#resultId").html("");
+
     createCharacter();
     createEnemies();
     attDataCharacter();
     selectEnemies();
+    attDataTarget();
 
     console.log("startBattle()");
 }
 
 function verifyAllEnemiesDead() {
-    for(var i = 0; i < enemies[indexEnemiesGroup].lenght; i++) {
+    for(var i = 0; i < enemies[indexEnemiesGroup].length; i++) {
         console.log("verifyAllEnemiesDead().verificationFor."+i)
         if(enemies[indexEnemiesGroup][i].life > 0) {
             console.log("verifyAllEnemiesDead().false");
@@ -223,21 +238,21 @@ function attack() {
     else {
         enemies[indexEnemiesGroup][indexTargetEnemy].life -= characters[indexCharacters].damage;
 
-        htmlFinal = enemies[indexEnemiesGroup][indexTargetEnemy].name + " received " + characters[indexCharacters].damage + " damage";
+        htmlFinal = enemies[indexEnemiesGroup][indexTargetEnemy].name + " received " + characters[indexCharacters].damage + " damage <br>";
 
         if(enemies[indexEnemiesGroup][indexTargetEnemy].life <= 0) {
-            htmlFinal += enemies[indexEnemiesGroup][indexTargetEnemy].name + " died"
+            htmlFinal += enemies[indexEnemiesGroup][indexTargetEnemy].name + " died <br>"
     
             enemies[indexEnemiesGroup][indexTargetEnemy].life = 0;
         }
     
         if(Math.floor(Math.random()*100) < percentageEnemy) {
             characters[indexCharacters].life -= enemies[indexEnemiesGroup][indexTargetEnemy].damage;
-            htmlFinal += characters[indexCharacters].type + " received " + enemies[indexEnemiesGroup][indexTargetEnemy].damage + " damage";
+            htmlFinal += characters[indexCharacters].type + " received " + enemies[indexEnemiesGroup][indexTargetEnemy].damage + " damage <br>";
     
             if(characters[indexCharacters] <= 0) {
                 characters[indexCharacters] = 0;
-                htmlFinal += characters[indexCharacters].type + " died";
+                htmlFinal += characters[indexCharacters].type + " died <br>";
             }
         }
     

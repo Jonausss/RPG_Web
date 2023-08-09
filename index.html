@@ -58,7 +58,7 @@
                 </div>
                 <div class="evolutionData">
                     <label>Evolution points: </label>
-                    <label id="EvolutionPointsId">1</label>
+                    <label id="EvolutionPointsId">0</label>
                 </div>
             </div>
         </div>
@@ -114,12 +114,12 @@
                         <div class="selectType">
                             <label class="labelSideName">Enemy</label>
                             <label class="customSelect">
-                                <select onchange="updateDataEnemy()" id="selectEnemyId">
+                                <select onchange="attDataTarget()" id="selectEnemyId">
                                     <option selected hidden>Select your enemy</option>
                                 </select>
                             </label>
                         </div>
-                        <img id="enemyImageId">
+                        <img id="imageEnemyId">
                         <table>
                             <tbody>
                                 <tr>
@@ -137,7 +137,7 @@
                 <div class="battle-results">
                     <label>Result: </label> <label id="resultId"></label>
                     <div>
-                        <button class="customButton" id="buttonLootId" onclick="loot()">LOOT</button>
+                        <button class="customButton" id="buttonLootId" onclick="loot()" disabled="disabled">LOOT</button>
                     </div>
                 </div>
             </div>
